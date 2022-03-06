@@ -14,5 +14,7 @@ python separate_valid_characters.py
 ### valid_words.json
 Separate all of the remaining valid words into lists of words by length.
 ```
-python 
+python separate_word_lengths.py
 ```
+## Next Steps
+Separate out each list of words into hard words based on word frequency.
