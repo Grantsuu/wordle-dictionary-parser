@@ -10,10 +10,10 @@ data = json.load(f)
 normal_words = []
 hard_words = []
 
-print(zipf_frequency('sylph', 'en'))
+#print(zipf_frequency('copts', 'en'))
 
 for word in data:
-    if zipf_frequency(word, 'en') < 2.25:
+    if zipf_frequency(word, 'en') < 2.5:
         hard_words.append(word)
     else:
         normal_words.append(word)
