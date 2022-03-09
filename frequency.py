@@ -1,4 +1,3 @@
-import string
 import sys, argparse
 from wordfreq import word_frequency, zipf_frequency
 
