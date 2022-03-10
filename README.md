@@ -3,6 +3,17 @@
 Includes usage and examples of included scripts.
 ### **parse_dictionary.py**
 Parses out and separates words based on lengths and then writes them to .json files.
+### Input
+`parse_dictionary.py` expects a dictionary .json file as an input. The dictionary .json file contains a single JSON object which is a series of key/value pairs where the **KEY** contains the word and the **VALUE** contains the definition of that word. It resides, by default, in the `input` directory.
+```
+{
+    "WORD1": "DEFINITION1",
+    "WORD2": "DEFINITION2",
+    "WORD3": "DEFINITION3",
+    ...
+}
+```
+For a good dictionary source see: https://github.com/matthewreagan/WebstersEnglishDictionary
 #### Usage
 `usage: parse_dictionary.py [-h] -i INPUT -o OUTPUT [-fn FILENAME] [--min MIN] [--max MAX] [-t THRESHOLD] [-c]`
 ```
@@ -25,7 +36,7 @@ optional arguments:
 ```
 #### Examples
 ```
-python3 parse_dictionary.py -i ./data/dictionary_compact.json -o ./data/
+python3 parse_dictionary.py -i ./input/dictionary.json -o ./output/
 ```
 Output files:
 - 4_letters_hard.json

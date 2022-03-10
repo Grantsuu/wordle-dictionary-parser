@@ -22,33 +22,32 @@ def main (args):
     args = parser.parse_args()
 
     start_time = time.time()
-
-    f = open(args.input)
-    data = json.load(f)
-
-    for i in range(args.min, args.max + 1):
-        normal = []
-        hard = []
-        for word in data.keys():
-            # Parse out invalid words (contains a " " or "-")
-            if len(word) is i and " " not in word and "-" not in word:
-                if args.combine:
-                    normal.append(word)
-                else:
-                    if zipf_frequency(word, args.lang) >= args.threshold:
+    
+    with open(args.input) as f:
+        data = json.load(f)
+        for i in range(args.min, args.max + 1):
+            normal = []
+            hard = []
+            for word in data.keys():
+                # Parse out invalid words (contains a " " or "-")
+                if len(word) is i and " " not in word and "-" not in word:
+                    if args.combine:
                         normal.append(word)
                     else:
-                        hard.append(word)
-        if args.combine:
-            with open(args.output + str(i) + "_" + args.filename + ".json", "w") as outfile:
-                outfile.write(json.dumps(normal))
-        else:
-            with open(args.output + str(i) + "_" + args.filename + "_normal.json", "w") as outfile:
-                outfile.write(json.dumps(normal))
-            with open(args.output + str(i) + "_" + args.filename + "_hard.json", "w") as outfile:
-                outfile.write(json.dumps(hard))
+                        if zipf_frequency(word, args.lang) >= args.threshold:
+                            normal.append(word)
+                        else:
+                            hard.append(word)
+            if args.combine:
+                with open(args.output + str(i) + "_" + args.filename + ".json", "w") as outfile:
+                    outfile.write(json.dumps(normal))
+            else:
+                with open(args.output + str(i) + "_" + args.filename + "_normal.json", "w") as outfile:
+                    outfile.write(json.dumps(normal))
+                with open(args.output + str(i) + "_" + args.filename + "_hard.json", "w") as outfile:
+                    outfile.write(json.dumps(hard))
+        print("--- %s seconds ---" % (time.time() - start_time))
 
-    print("--- %s seconds ---" % (time.time() - start_time))
 if __name__ == "__main__":
    main(sys.argv[1:])
 
